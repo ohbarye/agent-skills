@@ -1,26 +1,51 @@
 # agent-skills
 
-個人で使っている [Agent Skills](https://agentskills.io) の集まり。各 skill は `skills/<name>/SKILL.md`。
+A collection of personal [Agent Skills](https://agentskills.io). Each skill lives in `skills/<name>/SKILL.md`.
 
-| skill | 内容 |
+| Skill | Description |
 | --- | --- |
-| [`cosense-memo`](skills/cosense-memo) | 会話や記事の要約を Cosense(旧 Scrapbox)形式のメモに変換する |
-| [`magi-decision-support`](skills/magi-decision-support) | 3 つの視点(科学者・母・現実主義者)で意思決定を支援する |
-| [`pr-lead-time`](skills/pr-lead-time) | PR のリードタイム(open → merge → deploy)を営業時間(JST)で計測し、週次・月次で集計する |
-| [`review`](skills/review) | 5 つの専門サブエージェントで並列にコードレビューする |
-| [`spotify-playlist-creator`](skills/spotify-playlist-creator) | ブラウザ自動化で Spotify のプレイリストを作成する |
+| [`cosense-memo`](skills/cosense-memo) | Turns a conversation or an article summary into a note in Cosense (formerly Scrapbox) format. |
+| [`magi-decision-support`](skills/magi-decision-support) | Multi-perspective decision support with three agents (Scientist, Mother, Realist). |
+| [`pr-lead-time`](skills/pr-lead-time) | Measures PR lead time (open → merge → deploy) in business hours (JST) and aggregates it weekly or monthly. |
+| [`review`](skills/review) | Code review with five specialized subagents running in parallel (quality, performance, tests, docs, security). |
+| [`spotify-playlist-creator`](skills/spotify-playlist-creator) | Creates Spotify playlists by driving the desktop app with browser automation. |
 
-## インストール
+## Requirements
 
-[`gh skill`](https://cli.github.com/manual/gh_skill) で入れられる。
+Some skills depend on tools or agents that are not part of this repository.
+
+| Skill | Needs |
+| --- | --- |
+| `pr-lead-time` | Ruby (stdlib only) and an authenticated `gh` CLI |
+| `spotify-playlist-creator` | [`agent-browser`](https://github.com/vercel-labs/agent-browser) and the Spotify desktop app |
+| `review` | Subagents `code-quality-reviewer`, `performance-reviewer`, `test-coverage-reviewer`, `documentation-accuracy-reviewer`, `security-code-reviewer` (see [`claude/agents`](https://github.com/ohbarye/dotfiles/tree/main/claude/agents) in my dotfiles) |
+| `magi-decision-support` | Subagents `melchior`, `balthasar`, `casper` (same place) |
+
+## Install
+
+With [`gh skill`](https://cli.github.com/manual/gh_skill):
 
 ```sh
-gh skill install ohbarye/agent-skills pr-lead-time
-gh skill install ohbarye/agent-skills --all
+gh skill install ohbarye/agent-skills pr-lead-time      # one skill
+gh skill install ohbarye/agent-skills --all             # everything
+gh skill install ohbarye/agent-skills pr-lead-time --pin v0.1.0
 ```
 
-バージョンを固定する場合は `--pin v0.1.0`、または `<skill>@v0.1.0`。
+## Development
 
-## ライセンス
+`pr-lead-time` ships with tests:
+
+```sh
+cd skills/pr-lead-time
+for f in test/*_test.rb; do ruby -Ilib -Itest "$f"; done
+```
+
+Validate before publishing:
+
+```sh
+gh skill publish --dry-run
+```
+
+## License
 
 [MIT](LICENSE)
