@@ -5,6 +5,7 @@ A collection of personal [Agent Skills](https://agentskills.io). Each skill live
 | Skill | Description |
 | --- | --- |
 | [`cosense-memo`](skills/cosense-memo) | Turns a conversation or an article summary into a note in Cosense (formerly Scrapbox) format. |
+| [`devin-outer-loop`](skills/devin-outer-loop) | Hands a design to Devin, then loops inline review and fix verification on its PR until no findings remain. |
 | [`magi-decision-support`](skills/magi-decision-support) | Multi-perspective decision support with three agents (Scientist, Mother, Realist). |
 | [`pr-lead-time`](skills/pr-lead-time) | Measures PR lead time (open → merge → deploy) in business hours (JST) and aggregates it weekly or monthly. |
 | [`review`](skills/review) | Code review with five specialized subagents running in parallel (quality, performance, tests, docs, security). |
@@ -19,6 +20,7 @@ Some skills depend on tools or agents that are not part of this repository.
 | `pr-lead-time` | Ruby (stdlib only) and an authenticated `gh` CLI |
 | `spotify-playlist-creator` | [`agent-browser`](https://github.com/vercel-labs/agent-browser) and the Spotify desktop app |
 | `review` | Subagents `code-quality-reviewer`, `performance-reviewer`, `test-coverage-reviewer`, `documentation-accuracy-reviewer`, `security-code-reviewer` (see [`claude/agents`](https://github.com/ohbarye/dotfiles/tree/main/claude/agents) in my dotfiles) |
+| `devin-outer-loop` | The [Devin MCP server](https://docs.devin.ai) with session tools enabled, and an authenticated `gh` CLI |
 | `magi-decision-support` | Subagents `melchior`, `balthasar`, `casper` (same place) |
 
 ## Install
